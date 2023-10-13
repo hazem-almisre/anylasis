@@ -39,7 +39,7 @@ class SelectNurse implements ShouldQueue
      */
     public function handle()
     {
-        $region = Contact::query()->select('region')->findOrFail(1);
+        $region = Contact::query()->select('region')->findOrFail($this->contactId);
         $nurses=Nurse::selectNurseOrder($region->region,$this->labId);
         foreach ($$nurses as $value) {
             if($value->isActive){
