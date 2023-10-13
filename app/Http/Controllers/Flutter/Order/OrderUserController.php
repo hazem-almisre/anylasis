@@ -47,7 +47,7 @@ class OrderUserController extends Controller
             }
             $order['lines']=$lines;
             DB::commit();
-            dispatch(new SelectNurse($request->contactId,$request->labId,$order));
+            // dispatch(new SelectNurse($request->contactId,$request->labId,$order));
             return parent::sendRespons(['result'=>$order],ResponseMessage::$registerNurseSuccessfullMessage);
         } catch (\Throwable $th) {
             DB::rollBack();
