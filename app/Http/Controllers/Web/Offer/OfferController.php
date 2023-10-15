@@ -22,7 +22,6 @@ class OfferController extends Controller
         $offers= Offer::query()->where('dateEnd','>=',$date)->with('analysis',function($q){
            $q->select( "lable","price","description","labId");
         })->orderBy('dateEnd')->get();
-        $offers['labId']=$offers[0]['analysis'][0]['labId'];
         return parent::sendRespons(['result'=>$offers],ResponseMessage::$getLabLocations);
         } catch (\Throwable $th) {
             return parent::sendError($th->getMessage(),parent::getPostionError(OfferController::class,19),500) ;
