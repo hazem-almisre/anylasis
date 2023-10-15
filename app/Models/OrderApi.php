@@ -20,6 +20,7 @@ class OrderApi extends Model
         'instructios'
     ];
 
+    protected $casts = ['isFrequency' => 'boolean'];
     /**
      * Get the nurse that owns the OrderApi
      *
