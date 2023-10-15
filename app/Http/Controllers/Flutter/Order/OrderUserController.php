@@ -34,7 +34,7 @@ class OrderUserController extends Controller
                 'date'=>$request->date,
                 'labId'=>$request->labId,
                 'userId'=>$userId,
-                'isFrequency'=>$isFrequency,
+                'isFrequency'=>(bool)$isFrequency,
                 'instructios'=>$request->contactId
             ]);
 
@@ -69,7 +69,7 @@ class OrderUserController extends Controller
          $orders = OrderApi::query()->where('userId','=', $userId)->with('lines',function($q) use($status){
             $q->where('status','LIKE' , "%$status%")->get();
          })->with('nurse')->with('lab')->paginate(10);
-         return parent::sendRespons(['result'=>$orders],ResponseMessage::$registerNurseSuccessfullMessage);
+         return parent::sendRespons(['result'=>$orders->items()],ResponseMessage::$registerNurseSuccessfullMessage);
         }
         catch (\Throwable $th) {
             return parent::sendError($th->getMessage(),parent::getPostionError(OrderUserController::class,70),500) ;

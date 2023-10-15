@@ -22,7 +22,7 @@ class CreateOrderApisTable extends Migration
             $table->string('totalPrice');
             $table->text('instructios');
             $table->string('date'); //dateStart
-            $table->boolean('isFrequency')->default(0);
+            $table->boolean('isFrequency')->default(false);
             $table->foreign('nurseId')->references('nurseId')->on('nurses')->onUpdate('cascade');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('labId')->references('labId')->on('labs')->onUpdate('cascade');
