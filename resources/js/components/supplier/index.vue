@@ -85,7 +85,13 @@
         },
         methods:{
             allOffer(){
-                axios.get('/lab/offer/get/all/offer')
+                axios.get('/lab/offer/get/all/offer',
+                        {
+            headers:{
+                Authorization: 'Bearer '+sessionStorage.getItem('token')
+            }
+        }
+        )
                     .then((response) => {
                         console.log(response.data.data.result);
                         this.offers = response.data.data.result

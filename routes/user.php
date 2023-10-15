@@ -1,7 +1,9 @@
 <?php
 
 use App\User;
+use App\Models\Nurse;
 use App\Http\Controllers\Helper\NotifictionHelper;
+use App\Http\Controllers\Web\Offer\OfferController;
 use App\Http\Controllers\Flutter\Lab\UserLabController;
 use App\Http\Controllers\Web\Lab\AdminRegionController;
 use App\Http\Controllers\Flutter\User\UserAuthController;
@@ -9,19 +11,9 @@ use App\Http\Controllers\Flutter\Order\OrderUserController;
 use App\Http\Controllers\Flutter\User\RatingUserController;
 use App\Http\Controllers\Flutter\User\ContactUserController;
 use App\Http\Controllers\Web\Analysis\AnalysisLabController;
-use App\Models\Nurse;
 use Illuminate\Support\Facades\Route;  //--Eita dile ar "route" er niche error er red-wave ta r show kore na.
 
-// use Illuminate\Http\Request;
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-//===================//=================//=================//==================//=================//=========
-
-
-
-//---------------------For_JWT-------------------------
 
 Route::group(['prefix'=>'mobile'],function () {
     Route::post('register', [UserAuthController::class,'register']);
@@ -57,6 +49,8 @@ Route::group(['prefix'=>'contact' , 'middleware'=>'auth:api'],function () {
 });
 
 Route::post('rate/add',[RatingUserController::class,'store'])->middleware('auth:api');
+
+Route::get('get/all/offer', [OfferController::class,'index']);
 
 Route::group(['prefix'=>'user' , 'middleware'=>'auth:api'],function () {
     Route::get('get',[UserAuthController::class,'getUser']);

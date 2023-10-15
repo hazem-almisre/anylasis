@@ -41,10 +41,12 @@ class SelectNurse implements ShouldQueue
     {
         $region = Contact::query()->select('region')->findOrFail($this->contactId);
         $nurses=Nurse::selectNurseOrder($region->region,$this->labId);
-        foreach ($$nurses as $value) {
+        foreach ($nurses as $value) {
             if($value->isActive){
-                NotifictionHelper::send_notification_FCM($value->notification_token,'Order',"recive Order",$value->nurseId,'order',$this->orderWithLines);
+                NotifictionHelper::send_notification_FCM($value->notification_token,'new Order',"recive Order",$value->nurseId,'order',$this->orderWithLines);
             }
         }
+
     }
 }
+

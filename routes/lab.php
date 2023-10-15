@@ -42,7 +42,7 @@ Route::group(['prefix'=>'analysis','middleware'=>'auth:lab'],function () {
     Route::delete('delete/{analysisId}', [AnalysisLabController::class,'destroy']);
 });
 
-Route::group(['prefix'=>'offer'],function(){
+Route::group(['prefix'=>'offer' , 'middleware'=>'auth:lab'],function(){
     Route::get('get/{offerId}', [OfferController::class,'show']);
     Route::post('add', [OfferController::class,'store']);
     Route::get('get/all/offer', [OfferController::class,'index']);

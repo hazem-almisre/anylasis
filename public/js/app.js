@@ -6032,7 +6032,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     allOffer: function allOffer() {
       var _this2 = this;
-      axios.get('/lab/offer/get/all/offer').then(function (response) {
+      axios.get('/lab/offer/get/all/offer', {
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('token')
+        }
+      }).then(function (response) {
         console.log(response.data.data.result);
         _this2.offers = response.data.data.result;
       })["catch"](function (error) {

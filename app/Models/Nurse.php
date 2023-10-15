@@ -64,12 +64,12 @@ class Nurse extends Authenticatable implements JWTSubject
          select N.nurseId,N.notification_token,N.isActive
          from nurse_labs NL
          INNER JOIN nurses N on N.nurseId=NL.nurseId
-         WHERE NL.labId = \"$labId\"
+         WHERE NL.labId = '$labId'
          AND EXISTS
          (select N.nurseId from doctor_areas DA
          INNER JOIN lab_locations LL on LL.labLocationId=DA.labLocationId
          INNER JOIN nurses N on N.nurseId=DA.nurseId
-         Where LL.region=\"$region\")
+         Where LL.region='$region')
         "
          ;
         return DB::select($query);

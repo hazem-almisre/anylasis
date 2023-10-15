@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Flutter\Order;
 
+use App\Models\Line;
+use App\Models\Nurse;
+use App\Models\Contact;
 use App\Models\OrderApi;
+use App\Jobs\SelectNurse;
 use Illuminate\Http\Request;
 use App\Message\ResponseMessage;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FlutterAddOrderResquest;
+use App\Http\Controllers\Helper\NotifictionHelper;
 use App\Http\Requests\FlutterGetOrderByStatusResquest;
 use App\Http\Requests\FlutterOrderChangeStatusResquest;
-use App\Jobs\SelectNurse;
-use App\Models\Line;
 
 class OrderUserController extends Controller
 {
@@ -47,7 +50,7 @@ class OrderUserController extends Controller
             }
             $order['lines']=$lines;
             DB::commit();
-            dispatch(new SelectNurse($request->contactId,$request->labId,$order));
+             SelectNurse::dispatch($request->contactId,$request->labId,$order);
             return parent::sendRespons(['result'=>$order->orderId],ResponseMessage::$registerNurseSuccessfullMessage);
         } catch (\Throwable $th) {
             DB::rollBack();

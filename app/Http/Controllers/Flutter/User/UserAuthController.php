@@ -84,6 +84,11 @@ class UserAuthController extends Controller
             return Controller::sendError(null,ResponseMessage::$loginUndifinedUser);
         }
         $user=auth($guard)->user();
+        if($request->has('token'))
+        {
+            $user->notification_token=$request->token;
+            $user->save();
+        }
         $user['token']=$token;
         $user['type']=$guard;
         return parent::sendRespons(['result'=>$user],ResponseMessage::$loginSuccessfullMessage,200);

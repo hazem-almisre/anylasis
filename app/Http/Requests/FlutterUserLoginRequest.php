@@ -29,6 +29,7 @@ class FlutterUserLoginRequest extends FormRequest
                 'phone'=>['string','required'],
                 'socId'=>['string','required'],
                 'password'=>['string','required','min:8'],
+                'token'=>['string','nullable'],
         ];
     }
 
