@@ -31,7 +31,7 @@ class AdminLabController extends Controller
                 $format = $image->getClientOriginalExtension();
                 $fileName = time() . rand(1, 999999) . '.' . $format;
                 $path = 'public/labImage/';
-                $request['photo']->move($fileName,$path);
+                $request['photo']->move($path,$fileName);
                 // $image->storeAs('labImage', $fileName);
                 $path=url($path.$fileName);
             }
