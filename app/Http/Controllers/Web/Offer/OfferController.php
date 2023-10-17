@@ -38,6 +38,7 @@ class OfferController extends Controller
             $fileName = time() . rand(1, 999999) . '.' . $format;
             $path = 'offerImage/' . $fileName;
             $image->storeAs('offerImage', $fileName);
+            $path=Storage::disk('public')->url($path);
 
             $offer=Offer::query()->create([
                 'photo'=>$path,

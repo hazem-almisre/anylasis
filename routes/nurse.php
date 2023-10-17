@@ -30,3 +30,5 @@ Route::group(['prefix'=>'nurse' , 'middleware'=>'auth:nurse'],function () {
 
     Route::post('update',[FlutterNurseController::class,'updateNurse']);
 });
+
+Route::post('accepted',[FlutterNurseController::class,'acceptedOrder']);

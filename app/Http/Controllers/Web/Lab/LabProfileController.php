@@ -35,6 +35,7 @@ class LabProfileController extends Controller
                     if(Storage::exists($user->photo)){
                         Storage::delete($user->photo);
                     }
+                    $path=Storage::disk('public')->url($path);
                     $user->photo=$path;
                 }
                 $user->phoneEnter=($request->phoneEnter)?$request->phoneEnter:$user->phoneEnter;
@@ -50,7 +51,7 @@ class LabProfileController extends Controller
                 return parent::sendError($th->getMessage(),parent::getPostionError(LabProfileController::class,45),500);
             }
         }
-    
+
         public function getRegions(){
             try {
                 $labLocations= LabLocation::all();
@@ -58,6 +59,6 @@ class LabProfileController extends Controller
             } catch (\Throwable $th) {
                 return parent::sendError($th->getMessage(),parent::getPostionError(LabProfileController::class,59),500) ;
             }
-    
+
         }
 }

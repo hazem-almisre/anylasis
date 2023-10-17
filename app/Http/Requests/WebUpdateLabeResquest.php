@@ -33,7 +33,7 @@ class WebUpdateLabeResquest extends FormRequest
                 'region'=>['string','nullable'],
                 'description'=>['string','nullable'],
                 'labLocationId'=>['integer','nullable'],
-                // 'photo'=>['nullable','image','mimes:jpeg,jpg,png,gif'],
+                'photo'=>['nullable','image','mimes:jpeg,jpg,png,gif'],
         ];
     }
 

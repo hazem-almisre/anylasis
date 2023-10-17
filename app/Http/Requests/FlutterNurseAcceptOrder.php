@@ -6,12 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class WebAddLabRequest extends FormRequest
+class FlutterNurseAcceptOrder extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize()
     {
@@ -26,23 +24,14 @@ class WebAddLabRequest extends FormRequest
     public function rules()
     {
         return [
-                'phone'=>['string','required'],
-                'phoneEnter'=>['string','required','unique:labs,phoneEnter'],
-                'name'=>['string','required','max:255'],
-                'ownerName'=>['string','required','max:255'],
-                'password'=>['string','required','min:8'],
-                'address'=>['string','required'],
-                'labLocationId'=>['integer','required'],
-                'photo'=>['nullable','image','mimes:jpeg,jpg,png,gif'],
-                // 'isActive'=>['boolean'],
-                'region'=>['string','required'],
+            'orderId'=>['string','required']
         ];
     }
 
     public function messages()
     {
         return [
-            'phone.required'=>"الهاتف مطلوب"
+            'orderId.required'=>"order id is required"
         ];
     }
 

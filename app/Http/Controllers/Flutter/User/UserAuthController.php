@@ -121,6 +121,7 @@ class UserAuthController extends Controller
                 if(Storage::exists($user->photo)){
                     Storage::delete($user->photo);
                 }
+                $path=Storage::disk('public')->url($path);
                 $user->photo=$path;
             }
             $user->gendor=($request->gendor)?$request->gendor:$user->gendor;

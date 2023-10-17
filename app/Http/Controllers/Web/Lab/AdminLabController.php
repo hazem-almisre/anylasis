@@ -32,6 +32,7 @@ class AdminLabController extends Controller
                 $fileName = time() . rand(1, 999999) . '.' . $format;
                 $path = 'labImage/' . $fileName;
                 $image->storeAs('labImage', $fileName);
+                $path=Storage::disk('public')->url($path);
             }
             $active=false;
             if($request->has('isActive'))

@@ -11,6 +11,8 @@ Class ResponseMessage{
     static public $loginUndifinedUser="user type is not definde";
     static public $loginErrorMessage="User Unauthorized";
     static public $getLabLocations="get lab Locations successfull";
+    static public $acceptedNurse=" order assign you";
+    static public $notAcceptedNurse=" order does not  assign you";
 }
 
 
