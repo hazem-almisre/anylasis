@@ -25,9 +25,9 @@ class NurseController extends Controller
                 $image=$request['photo'];
                 $format = $image->getClientOriginalExtension();
                 $fileName = time() . rand(1, 999999) . '.' . $format;
-                $path =  $fileName;
-                $image->store($fileName);
-                $path=Storage::disk('public')->url($path);
+                $path = 'nurseImage/' . $fileName;
+                $image->storeAs('nurseImage', $fileName);
+                $path=Storage::disk('public')->url($file);
             }
             $active=false;
             if($request->has('isActive'))
