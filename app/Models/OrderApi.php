@@ -17,7 +17,8 @@ class OrderApi extends Model
         'labId',
         'userId',
         'isFrequency',
-        'instructios'
+        'instructios',
+        'status'
     ];
 
     protected $casts = ['isFrequency' => 'boolean'];

@@ -48,10 +48,10 @@ class UserLabController extends Controller
             $labs=Lab::query()->where('name','like',"%$labName%")->get();
             foreach ($labs as $value) {
                 if($value['name'] == $labName){
-                    $result['sameName']=$value;
+                    $result['sameName'][]=$value;
                 }
                 else {
-                    $result['likeName']=$value;
+                    $result['likeName'][]=$value;
                 }
             }
             return parent::sendRespons(['result'=>$result],ResponseMessage::$registerNurseSuccessfullMessage);

@@ -35,7 +35,8 @@ class OrderUserController extends Controller
                 'labId'=>$request->labId,
                 'userId'=>$userId,
                 'isFrequency'=>(bool)$isFrequency,
-                'instructios'=>$request->contactId
+                'instructios'=>$request->contactId,
+                'status'=>"prosessing",
             ]);
 
             $lines=[];
@@ -66,9 +67,8 @@ class OrderUserController extends Controller
         $userId = auth()->id();
         $status=$request->status;
         //$id = Auth::id();
-         $orders = OrderApi::query()->where('userId','=', $userId)->with('lines',function($q) use($status){
-            $q->where('status','LIKE' , "%$status%")->get();
-         })->with('nurse')->with('lab')->paginate(10);
+         $orders = OrderApi::query()->where('userId','=', $userId)->where('status','=', "$status")
+         ->with('lines')->with('nurse')->with('lab')->paginate(10);
          return parent::sendRespons(['result'=>$orders->items()],ResponseMessage::$registerNurseSuccessfullMessage);
         }
         catch (\Throwable $th) {
@@ -79,9 +79,24 @@ class OrderUserController extends Controller
     public function changeOrderStatus(FlutterOrderChangeStatusResquest $request)
     {
         try{
-         $order = Line::query()->findOrFail($request->lineId);
-         $order->status = ($request->status)?$order->status:$request->status;
-         $order->save();
+         $order = OrderApi::query()->findOrFail($request->orderId);
+         $lines = $order->lines;
+         $orderFinish = true;
+         foreach ($lines as $value)
+         {
+            if($value->lineId == $request->lineId){
+                $value->status=$request->status;
+                $value->save();
+            }
+            if($value->status != "finish")
+            {
+                $orderFinish = false;
+            }
+         }
+         if($orderFinish){
+            $order->status = 'finish';
+            $order->save();
+         }
          return parent::sendRespons(['result'=>[]],ResponseMessage::$registerNurseSuccessfullMessage);
         }
         catch (\Throwable $th) {

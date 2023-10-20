@@ -7366,7 +7366,7 @@ var render = function render() {
       key: lab.labID
     }, [_c("td", [_vm._v(_vm._s(lab.name))]), _vm._v(" "), _c("td", [_c("img", {
       attrs: {
-        src: "storage/" + lab.photo,
+        src: lab.photo,
         id: "em_photo"
       }
     })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(lab.phone))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(lab.ownerName))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(lab.created_at))]), _vm._v(" "), _c("td", [_c("div", {
@@ -8874,7 +8874,7 @@ var render = function render() {
       key: employee.nurseId
     }, [_c("td", [_vm._v(_vm._s(employee.name))]), _vm._v(" "), _c("td", [_c("img", {
       attrs: {
-        src: "storage/" + employee.photo,
+        src: employee.photo,
         id: "em_photo"
       }
     })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(employee.phone))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(employee.ratio))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(employee.created_at))]), _vm._v(" "), _c("td", [_c("div", {
@@ -14270,7 +14270,7 @@ var render = function render() {
       key: offer.offerId
     }, [_c("td", [_vm._v(_vm._s(offer.dateEnd))]), _vm._v(" "), _c("td", [_c("img", {
       attrs: {
-        src: "storage/" + offer.photo,
+        src: offer.photo,
         id: "em_photo"
       }
     })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(offer.priceAfterOffer))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(offer.priceBeforOffer))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(offer.analysisCount))]), _vm._v(" "), _c("td", [_c("router-link", {
@@ -32478,7 +32478,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#add_new {\r\n  float: right;\n}\n#em_photo {\r\n  height: 40px;\r\n  width: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#add_new {\n  float: right;\n}\n#em_photo {\n  height: 40px;\n  width: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

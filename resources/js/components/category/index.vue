@@ -69,7 +69,7 @@
                 <tr v-for="lab in filtersearch" :key="lab.labID">
                   <!-------------------------->
                   <td>{{ lab.name }}</td>
-                  <td><img :src="'storage/'+lab.photo" id="em_photo" /></td>
+                  <td><img :src="lab.photo" id="em_photo" /></td>
                   <!--bind(:) korle R {{}} lage na-->
                   <td>{{ lab.phone }}</td>
                   <td>{{ lab.ownerName }}</td>

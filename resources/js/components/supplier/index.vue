@@ -35,7 +35,7 @@
                             <tbody>
                             <tr v-for="offer in filtersearch" :key="offer.offerId">
                                 <td>{{ offer.dateEnd }}</td>
-                                <td><img :src="'storage/'+offer.photo" id="em_photo"></td>
+                                <td><img :src="offer.photo" id="em_photo"></td>
                                 <td>{{ offer.priceAfterOffer }}</td>
                                 <td>{{ offer.priceBeforOffer }}</td>
                                 <td>{{ offer.analysisCount }}</td>

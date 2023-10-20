@@ -23,7 +23,7 @@ class CreateContactsTable extends Migration
             $table->string('lat');
             $table->string('long');
             $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

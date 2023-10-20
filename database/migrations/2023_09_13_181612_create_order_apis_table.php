@@ -21,12 +21,13 @@ class CreateOrderApisTable extends Migration
             $table->unsignedBigInteger('userId');
             $table->string('totalPrice');
             $table->text('instructios');
+            $table->enum('status',['finish','prosessing']);
             $table->string('date'); //dateStart
             $table->boolean('isFrequency')->default(false);
-            $table->foreign('nurseId')->references('nurseId')->on('nurses')->onUpdate('cascade');
-            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('labId')->references('labId')->on('labs')->onUpdate('cascade');
-            $table->foreign('contactId')->references('contactId')->on('contacts')->onUpdate('cascade');
+            $table->foreign('nurseId')->references('nurseId')->on('nurses')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('labId')->references('labId')->on('labs')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('contactId')->references('contactId')->on('contacts')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

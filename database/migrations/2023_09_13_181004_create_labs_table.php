@@ -26,7 +26,7 @@ class CreateLabsTable extends Migration
             // $table->text('description');
             // $table->text('notification_token');
             $table->unsignedBigInteger('labLocationId');
-            $table->foreign('labLocationId')->references('labLocationId')->on('lab_locations')->onUpdate('cascade');
+            $table->foreign('labLocationId')->references('labLocationId')->on('lab_locations')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('isActive')->default(0);
             $table->boolean('distinct')->default(0);
             $table->timestamps();

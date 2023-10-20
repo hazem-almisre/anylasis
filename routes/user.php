@@ -10,7 +10,6 @@ use App\Http\Controllers\Flutter\User\UserAuthController;
 use App\Http\Controllers\Flutter\Order\OrderUserController;
 use App\Http\Controllers\Flutter\User\RatingUserController;
 use App\Http\Controllers\Flutter\User\ContactUserController;
-use App\Http\Controllers\Web\Analysis\AnalysisLabController;
 use Illuminate\Support\Facades\Route;  //--Eita dile ar "route" er niche error er red-wave ta r show kore na.
 
 

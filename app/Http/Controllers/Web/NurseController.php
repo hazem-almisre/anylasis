@@ -24,7 +24,7 @@ class NurseController extends Controller
             {
                 $image=$request['photo'];
                 $format = $image->getClientOriginalExtension();
-                $fileName = time() . rand(1, 999999) . '.' . $format;
+                $fileName = time() . rand(1, 999) . '.' . $format;
                 $path = 'nurseImage/' . $fileName;
                 $image->storeAs('nurseImage', $fileName);
                 $path=Storage::disk('public')->url($path);
@@ -89,6 +89,7 @@ class NurseController extends Controller
         try {
             $nurse = Nurse::query()->where('nurseId','=',$nurseId)->first();
             $photo = $nurse->photo;
+            $photo=Str::afterLast($photo, '/storage/');
             if(Storage::exists($photo))
             Storage::delete($photo);
             $nurse->delete();

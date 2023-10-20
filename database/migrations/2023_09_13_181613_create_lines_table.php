@@ -20,7 +20,7 @@ class CreateLinesTable extends Migration
             $table->integer('price');
             $table->enum('status',['finish','prosessing']);
             $table->unsignedBigInteger('orderId');
-            $table->foreign('orderId')->references('orderId')->on('order_apis')->onDelete('cascade');
+            $table->foreign('orderId')->references('orderId')->on('order_apis')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

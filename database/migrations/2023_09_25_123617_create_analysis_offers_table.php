@@ -16,9 +16,9 @@ class CreateAnalysisOffersTable extends Migration
         Schema::create('analysis_offers', function (Blueprint $table) {
             $table->bigIncrements('AnalysisOfferId');
             $table->unsignedBigInteger('analysisId');
-            $table->foreign('analysisId')->references('analysisId')->on('analyses')->onDelete('cascade');
+            $table->foreign('analysisId')->references('analysisId')->on('analyses')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('offerId');
-            $table->foreign('offerId')->references('offerId')->on('offers')->onDelete('cascade');
+            $table->foreign('offerId')->references('offerId')->on('offers')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

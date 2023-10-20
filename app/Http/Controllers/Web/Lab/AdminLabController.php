@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Lab;
 
 use App\Models\Lab;
 use App\Models\LabLocation;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Message\ResponseMessage;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,7 @@ class AdminLabController extends Controller
             {
                 $image=$request['photo'];
                 $format = $image->getClientOriginalExtension();
-                $fileName = time() . rand(1, 999999) . '.' . $format;
+                $fileName = time() . rand(1, 999) . '.' . $format;
                 $path = 'labImage/' . $fileName;
                 $image->storeAs('labImage', $fileName);
                 $path=Storage::disk('public')->url($path);
@@ -83,6 +84,7 @@ class AdminLabController extends Controller
         try {
             $lab = Lab::query()->where('labId','=',$labId)->first();
             $photo = $lab->photo;
+            $photo=Str::afterLast($photo, '/storage/');
             if(Storage::exists($photo))
             Storage::delete($photo);
             $lab->delete();

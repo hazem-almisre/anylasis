@@ -28,6 +28,7 @@ class FlutterOrderChangeStatusResquest extends FormRequest
         return [
             'status'=>['required','in:onProgres,finish,prosessing'],
             'lineId'=>['required','integer'],
+            'orderId'=>['required','integer'],
         ];
     }
 

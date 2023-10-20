@@ -17,8 +17,8 @@ class CreateNurseLabsTable extends Migration
             $table->id('nurseLabId');
             $table->unsignedBigInteger('nurseId');
             $table->unsignedBigInteger('labId');
-            $table->foreign('nurseId')->references('nurseId')->on('nurses')->onUpdate('cascade');
-            $table->foreign('labId')->references('labId')->on('labs')->onDelete('cascade');
+            $table->foreign('nurseId')->references('nurseId')->on('nurses')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('labId')->references('labId')->on('labs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

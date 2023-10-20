@@ -69,7 +69,7 @@
                 <tr v-for="employee in filtersearch" :key="employee.nurseId">
                   <!-------------------------->
                   <td>{{ employee.name }}</td>
-                  <td><img :src="'storage/'+employee.photo" id="em_photo" /></td>
+                  <td><img :src="employee.photo" id="em_photo" /></td>
                   <!--bind(:) korle R {{}} lage na-->
                   <td>{{ employee.phone }}</td>
                   <td>{{ employee.ratio }}</td>

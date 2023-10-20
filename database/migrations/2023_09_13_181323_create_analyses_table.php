@@ -21,7 +21,7 @@ class CreateAnalysesTable extends Migration
             $table->string('firstPrice');
             $table->string('secondPrice')->nullable();
             $table->unsignedBigInteger('labId');
-            $table->foreign('labId')->references('labId')->on('labs')->onDelete('cascade');
+            $table->foreign('labId')->references('labId')->on('labs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
