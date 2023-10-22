@@ -134,7 +134,15 @@ export default {
         console.log(this.labLocations)
         })
         .catch((error)=>{
-            console.log(error.response.data)
+                    let statusCode = error.response.status
+                    if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
         });
     },
   },

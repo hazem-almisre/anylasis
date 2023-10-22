@@ -3247,7 +3247,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         phoneEnter: null,
         region: null,
         labLocationId: null,
-        isActive: false
+        isActive: false,
+        description: null
       },
       labLocations: [],
       region: {
@@ -3282,13 +3283,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.form.region = this.region.value;
       this.form.labLocationId = this.region.key;
       var formDate = new FormData();
-      console.log(formDate);
       Object.entries(this.form).forEach(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
           key = _ref2[0],
           value = _ref2[1];
         console.log(key + " " + value);
-        formDate.append(key, value);
+        if (value !== null) {
+          formDate.append(key, value);
+        }
       });
       axios.post('/lab/admin/add/lab', formDate, {
         headers: {
@@ -3302,8 +3304,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         }); //(index.vue)all-employee vue page e jabe
         Notification.success();
       })["catch"](function (error) {
-        console.log(error.response.data);
-        _this2.errors = error.response.data.data;
+        var statusCode = error.response.status;
+        console.log(statusCode);
+        if (statusCode == 422) {
+          console.log(error.response.data);
+          _this2.errors = error.response.data.data.result;
+        } else if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     },
     getRegions: function getRegions() {
@@ -3500,7 +3513,17 @@ __webpack_require__.r(__webpack_exports__);
       .then(function (data) {
         _this2.labs = data.data.data.result;
         console.log(_this2.labs);
-      })["catch"]();
+      })["catch"](function (error) {
+        var statusCode = error.response.status;
+        if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
+      });
     },
     deleteLab: function deleteLab(labId) {
       var _this3 = this;
@@ -3527,7 +3550,15 @@ __webpack_require__.r(__webpack_exports__);
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
             //    this.$router.push({ name: "category" });
           })["catch"](function (error) {
-            console.log(error.response.data);
+            var statusCode = error.response.status;
+            if (statusCode == 401) {
+              AppStorage.clear();
+              _this3.$router.push({
+                name: '/'
+              });
+            } else {
+              Notification.error();
+            }
           });
         }
       });
@@ -3837,13 +3868,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.form.labs = this.labs;
       console.log(this.form.labLocationIds);
       var formDate = new FormData();
-      console.log(formDate);
       Object.entries(this.form).forEach(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
           key = _ref2[0],
           value = _ref2[1];
         console.log(key + " " + value);
-        formDate.append(key, value);
+        if (value !== null) {
+          formDate.append(key, value);
+        }
       });
       axios.post('/nurse/web/add/nurse', formDate, {
         headers: {
@@ -3858,8 +3890,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         }); //(index.vue)all-employee vue page e jabe
         Notification.success();
       })["catch"](function (error) {
-        console.log(error.response.data);
-        _this2.errors = error.response.data.data;
+        var statusCode = error.response.status;
+        console.log(statusCode);
+        if (statusCode == 422) {
+          console.log(error.response.data);
+          _this2.errors = error.response.data.data.result;
+        } else if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     },
     getRegions: function getRegions() {
@@ -4062,7 +4105,17 @@ __webpack_require__.r(__webpack_exports__);
       .then(function (data) {
         _this2.employees = data.data.data.result;
         console.log(_this2.employees);
-      })["catch"]();
+      })["catch"](function (error) {
+        var statusCode = error.response.status;
+        if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
+      });
     },
     deleteEmployee: function deleteEmployee(nurseId) {
       var _this3 = this;
@@ -4091,7 +4144,15 @@ __webpack_require__.r(__webpack_exports__);
               name: "employee"
             });
           })["catch"](function (error) {
-            console.log(error.response.data);
+            var statusCode = error.response.status;
+            if (statusCode == 401) {
+              AppStorage.clear();
+              _this3.$router.push({
+                name: '/'
+              });
+            } else {
+              Notification.error();
+            }
           });
         }
       });
@@ -5046,8 +5107,19 @@ __webpack_require__.r(__webpack_exports__);
         });
         Notification.success();
       })["catch"](function (error) {
-        console.log(error);
-        _this.errors = error.response.data;
+        var statusCode = error.response.status;
+        console.log(statusCode);
+        if (statusCode == 422) {
+          console.log(error.response.data);
+          _this.errors = error.response.data.data.result;
+        } else if (statusCode == 401) {
+          AppStorage.clear();
+          _this.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     }
   }
@@ -5244,7 +5316,15 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         _this2.products = response.data.data.result;
       })["catch"](function (error) {
-        console.log(error);
+        var statusCode = error.response.status;
+        if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     },
     deleteProduct: function deleteProduct(id) {
@@ -5272,7 +5352,15 @@ __webpack_require__.r(__webpack_exports__);
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
             //    this.$router.push({ name: "category" });
           })["catch"](function (error) {
-            console.log(error);
+            var statusCode = error.response.status;
+            if (statusCode == 401) {
+              AppStorage.clear();
+              _this3.$router.push({
+                name: '/'
+              });
+            } else {
+              Notification.error();
+            }
           });
         }
       });
@@ -5375,8 +5463,19 @@ __webpack_require__.r(__webpack_exports__);
         });
         Notification.success();
       })["catch"](function (error) {
-        console.log(error.response.data.data);
-        _this.errors = error.response.data.data;
+        var statusCode = error.response.status;
+        console.log(statusCode);
+        if (statusCode == 422) {
+          console.log(error.response.data);
+          _this.errors = error.response.data.data.result;
+        } else if (statusCode == 401) {
+          AppStorage.clear();
+          _this.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     }
   }
@@ -5521,7 +5620,15 @@ __webpack_require__.r(__webpack_exports__);
         _this2.labLocations = data.data.data.result;
         console.log(_this2.labLocations);
       })["catch"](function (error) {
-        console.log(error.response.data);
+        var statusCode = error.response.status;
+        if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     }
   }
@@ -5880,8 +5987,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         });
         Notification.success();
       })["catch"](function (error) {
-        console.log(error.response);
-        _this2.errors = error.response.data.errors;
+        var statusCode = error.response.status;
+        console.log(statusCode);
+        if (statusCode == 422) {
+          console.log(error.response.data);
+          _this2.errors = error.response.data.data.result;
+        } else if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     },
     getAnalysis: function getAnalysis() {
@@ -5894,8 +6012,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         console.log(response.data);
         _this3.analysis = response.data.data.result;
       })["catch"](function (error) {
-        console.log(error.response);
-        _this3.errors = error.response;
+        var statusCode = error.response.status;
+        console.log(statusCode);
+        if (statusCode == 422) {
+          console.log(error.response.data);
+          _this3.errors = error.response.data.data.result;
+        } else if (statusCode == 401) {
+          AppStorage.clear();
+          _this3.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     } // chooseAnalysis(analysisId,event){
     //     console.log(event.preventDefault())
@@ -6040,7 +6169,15 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data.data.result);
         _this2.offers = response.data.data.result;
       })["catch"](function (error) {
-        console.log(error.response);
+        var statusCode = error.response.status;
+        if (statusCode == 401) {
+          AppStorage.clear();
+          _this2.$router.push({
+            name: '/'
+          });
+        } else {
+          Notification.error();
+        }
       });
     },
     deleteOffer: function deleteOffer(offerId) {
@@ -6610,7 +6747,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fas fa-chart-area"
-  }), _vm._v("\n\t\t\t\t\tEmployee Insert\n\t\t\t\t\t"), _c("router-link", {
+  }), _vm._v("\n\t\t\t\t\tLab Insert\n\t\t\t\t\t"), _c("router-link", {
     staticClass: "btn btn-success",
     staticStyle: {
       "border-radius": "20px"
@@ -6619,7 +6756,7 @@ var render = function render() {
       to: "/employee",
       id: "add_new"
     }
-  }, [_vm._v(" All Employee")])], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v(" All Labs")])], 1), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("form", {
     attrs: {
@@ -6702,6 +6839,42 @@ var render = function render() {
   }), _vm._v(" "), _vm.errors.phone ? _c("small", {
     staticClass: "text-danger"
   }, [_vm._v(_vm._s(_vm.errors.phone[0]))]) : _vm._e()])])])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("div", {
+    staticClass: "form-row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "Textarea1"
+    }
+  }, [_vm._v("Description Of labs")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.description,
+      expression: "form.description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      id: "Textarea1",
+      required: "",
+      placeholder: "Enter Description"
+    },
+    domProps: {
+      value: _vm.form.description
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.form, "description", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm.errors.description ? _c("small", {
+    staticClass: "text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.description[0]))]) : _vm._e()])])])]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("div", {
     staticClass: "form-row align-items-end"
@@ -6899,9 +7072,9 @@ var render = function render() {
     on: {
       change: _vm.onFileselected
     }
-  }), _vm._v(" "), _vm.errors.image ? _c("small", {
+  }), _vm._v(" "), _vm.errors.photo ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.image[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.errors.photo[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-5"
   }, [_vm.image != "" ? _c("img", {
     staticStyle: {
@@ -14333,9 +14506,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _helpers_User__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helpers/User */ "./resources/js/helpers/User.js");
-/* harmony import */ var _helpers_Notification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/Notification */ "./resources/js/helpers/Notification.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/AppStorage */ "./resources/js/helpers/AppStorage.js");
+/* harmony import */ var _helpers_Notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helpers/Notification */ "./resources/js/helpers/Notification.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 // window.Vue = require('vue'); //or bellow line
@@ -14350,23 +14524,27 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
 
 window.User = _helpers_User__WEBPACK_IMPORTED_MODULE_3__["default"]; //--for 'globally' use
 
+//---import AppStorage Class----
+
+window.AppStorage = _helpers_AppStorage__WEBPACK_IMPORTED_MODULE_4__["default"]; //--for 'globally' use
+
 //----import Notification Class-------
  //--for 'globally' use
-window.Notification = _helpers_Notification__WEBPACK_IMPORTED_MODULE_4__["default"];
+window.Notification = _helpers_Notification__WEBPACK_IMPORTED_MODULE_5__["default"];
 
 //----start-----Sweetalert2------
 
-window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()); //--for 'globally' use
+window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_6___default()); //--for 'globally' use
 
-var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().mixin({
+var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
   timer: 3000,
   timerProgressBar: true,
   onOpen: function onOpen(toast) {
-    toast.addEventListener('mouseenter', (sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().stopTimer));
-    toast.addEventListener('mouseleave', (sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().resumeTimer));
+    toast.addEventListener('mouseenter', (sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().stopTimer));
+    toast.addEventListener('mouseleave', (sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().resumeTimer));
   }
 });
 window.Toast = Toast; //--for 'globally' use
@@ -14571,7 +14749,7 @@ var Notification = /*#__PURE__*/function () {
       new Noty({
         type: 'error',
         layout: 'topRight',
-        text: 'Something went wrong !',
+        text: 'Something went wrong please contact with us !',
         timeout: 1000
       }).show();
     }
@@ -14582,7 +14760,7 @@ var Notification = /*#__PURE__*/function () {
         type: 'warning',
         layout: 'topRight',
         text: 'Oops! Wrong',
-        timeout: 1000
+        timeout: 5000
       }).show();
     }
   }, {

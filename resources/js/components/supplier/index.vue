@@ -97,7 +97,15 @@
                         this.offers = response.data.data.result
                         })
                     .catch((error)=>{
-                        console.log(error.response)
+                    let statusCode = error.response.status
+                    if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
                     })
             },
             deleteOffer(offerId){

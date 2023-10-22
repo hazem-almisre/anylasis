@@ -54,6 +54,7 @@ class AdminLabController extends Controller
                 'labLocationId'=>$request->labLocationId,
                 'password'=>Hash::make($request->password),
                 'isActive'=>$active,
+                'description'=>$request->description
             ]);
             return parent::sendRespons(['result'=>[]],ResponseMessage::$registerNurseSuccessfullMessage);
         } catch (\Throwable $th) {

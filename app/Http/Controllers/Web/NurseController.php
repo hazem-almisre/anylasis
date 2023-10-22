@@ -20,6 +20,7 @@ class NurseController extends Controller
     public function addNurse(WebAddNursRequest $request) {
         try {
             DB::beginTransaction();
+            $path=null;
             if($request['photo'])
             {
                 $image=$request['photo'];

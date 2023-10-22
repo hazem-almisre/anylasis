@@ -15,6 +15,10 @@ import {routes} from './routes';
 import User from './helpers/User';
 window.User = User                  //--for 'globally' use
 
+//---import AppStorage Class----
+import AppStorage from './helpers/AppStorage';
+window.AppStorage = AppStorage                  //--for 'globally' use
+
 
 //----import Notification Class-------
 import Notification from './helpers/Notification';  //--for 'globally' use

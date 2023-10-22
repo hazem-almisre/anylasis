@@ -23,7 +23,7 @@ class CreateLabsTable extends Migration
             $table->string('region');
             $table->string('address');
             $table->text('photo');
-            // $table->text('description');
+            $table->text('description');
             // $table->text('notification_token');
             $table->unsignedBigInteger('labLocationId');
             $table->foreign('labLocationId')->references('labLocationId')->on('lab_locations')->onUpdate('cascade')->onDelete('cascade');

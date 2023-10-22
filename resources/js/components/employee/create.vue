@@ -175,10 +175,11 @@
                 this.form.labs= this.labs
                 console.log(this.form.labLocationIds)
                 const formDate=new FormData();
-                console.log(formDate);
                 Object.entries(this.form).forEach(([key, value]) => {
                     console.log(key+" "+value);
+                    if(value !== null){
                     formDate.append(key, value);
+                    }
                 });
 				axios.post('/nurse/web/add/nurse',formDate,{headers : {
                 'Content-Type': 'multipart/form-data',
@@ -190,8 +191,20 @@
 					Notification.success()
 				})
 				.catch((error) => {
+                    let statusCode = error.response.status
+                    console.log(statusCode)
+                    if(statusCode == 422){
                     console.log(error.response.data);
-                    this.errors = error.response.data.data;
+                    this.errors = error.response.data.data.result;
+                    }
+                    else if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
                 })
 			},
 

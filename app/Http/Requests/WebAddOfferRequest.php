@@ -27,7 +27,7 @@ class WebAddOfferRequest extends FormRequest
     {
         return [
                 'dateEnd'=>['date_format:Y-m-d','required'],
-                'photo'=>['image','mimes:jpeg,jpg,png,gif'],
+                'photo'=>['required','image','mimes:jpeg,jpg,png,gif'],
                 'priceBeforOffer'=>['integer','required'],
                 'priceAfterOffer'=>['integer','required'],
                 'analysisCount'=>['integer','required'],
@@ -38,7 +38,7 @@ class WebAddOfferRequest extends FormRequest
     public function messages()
     {
         return [
-            'date.required'=>"التاريخ مطلوب"
+            'dateEnd.required'=>"التاريخ مطلوب"
         ];
     }
 

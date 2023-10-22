@@ -82,8 +82,22 @@
         			Notification.success()
         		})
         		.catch((error) => {
-                    console.log(error.response.data.data)
-                    this.errors = error.response.data.data})
+                    let statusCode = error.response.status
+                    console.log(statusCode)
+                    if(statusCode == 422){
+                    console.log(error.response.data);
+                    this.errors = error.response.data.data.result;
+                    }
+                    else if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
+                }
+              )
         	},
         }
     }

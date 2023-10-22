@@ -94,7 +94,15 @@
             }
             )
                     .catch((error)=>{
-                        console.log(error);
+                    let statusCode = error.response.status
+                    if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
                     })
             },
          deleteProduct(id) {
@@ -121,7 +129,15 @@
             //    this.$router.push({ name: "category" });
             })
             .catch((error) => {
-                console.log(error)
+                    let statusCode = error.response.status
+                    if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
             });
 
         }

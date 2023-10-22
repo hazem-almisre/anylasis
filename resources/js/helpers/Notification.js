@@ -32,7 +32,7 @@ class Notification{
         new Noty({
             type:'error',
             layout:'topRight',
-            text: 'Something went wrong !',
+            text: 'Something went wrong please contact with us !',
             timeout:1000,
         }).show();
     }
@@ -42,7 +42,7 @@ class Notification{
             type:'warning',
             layout:'topRight',
             text: 'Oops! Wrong',
-            timeout:1000,
+            timeout:5000,
         }).show();
     }
 

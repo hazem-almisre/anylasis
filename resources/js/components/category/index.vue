@@ -148,7 +148,17 @@ export default {
         this.labs=data.data.data.result
         console.log(this.labs)
         })
-        .catch();
+        .catch((error)=>{
+                    let statusCode = error.response.status
+                    if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
+        });
     },
     deleteLab(labId) {
       Swal.fire({
@@ -174,7 +184,15 @@ export default {
             //    this.$router.push({ name: "category" });
             })
             .catch((error) => {
-                console.log(error.response.data)
+                    let statusCode = error.response.status
+                    if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
             });
 
         }

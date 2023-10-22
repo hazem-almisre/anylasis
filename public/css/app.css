@@ -12216,3 +12216,7 @@ textarea.form-control-lg {
   border-bottom: 1px solid #A0B55C;
   color: #fff;
 }
+
+.h{
+    bacbackground:linear-gradient(to right, rgb(29, 27, 27), rgb(151, 145, 145));
+}

@@ -26,23 +26,25 @@ class WebAddLabRequest extends FormRequest
     public function rules()
     {
         return [
-                'phone'=>['string','required'],
+                'phone'=>['string','required','min:10','max:10'],
                 'phoneEnter'=>['string','required','unique:labs,phoneEnter'],
                 'name'=>['string','required','max:255'],
                 'ownerName'=>['string','required','max:255'],
                 'password'=>['string','required','min:8'],
                 'address'=>['string','required'],
                 'labLocationId'=>['integer','required'],
-                'photo'=>['nullable','image','mimes:jpeg,jpg,png,gif'],
+                'photo'=>['required','image','mimes:jpeg,jpg,png,gif'],
                 // 'isActive'=>['boolean'],
                 'region'=>['string','required'],
+                'description'=>['required','string']
         ];
     }
 
     public function messages()
     {
         return [
-            'phone.required'=>"الهاتف مطلوب"
+            'phone.required'=>"الهاتف مطلوب",
+            'phone.min'=>"الرقم يجب ان يتألف من عشر خانات",
         ];
     }
 

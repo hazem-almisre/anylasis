@@ -13,11 +13,11 @@
 			<div class="card col-12 shadow" style="padding: 0;">	    <!--------f------->
 				<div class="card-header text-white bg-dark" style="font-size: 20px; font-weight: 700;">  <!------f----->
 					<i class="fas fa-chart-area"></i>
-					Employee Insert
+					Lab Insert
 					<router-link to="/employee" class="btn btn-success"
                     style="
                         border-radius: 20px;
-                    " id="add_new"> All Employee</router-link>  <!----------->
+                    " id="add_new"> All Labs</router-link>  <!----------->
 				</div>
 
 				<div class="card-body">
@@ -39,6 +39,18 @@
 									</div>
 								</div>
 							</div>
+						</div>
+
+                        <div class="form-group">
+						<div class="form-row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                            <label for="Textarea1">Description Of labs</label>
+                            <textarea class="form-control" id="Textarea1"  v-model="form.description" required placeholder="Enter Description"></textarea>
+                            <small class="text-danger" v-if="errors.description">{{ errors.description[0] }}</small>
+                            </div>
+                            </div>
+                   		</div>
 						</div>
 						<div class="form-group">
 							<div class="form-row align-items-end">
@@ -90,7 +102,7 @@
                                 <div class="col-md-5">
                                     <div class="form-label-group">
                                         <input type="file" class="btn btn-info" @change="onFileselected">   <!----------------->
-                                        <small class="text-danger" v-if="errors.image">{{ errors.image[0] }}</small>
+                                        <small class="text-danger" v-if="errors.photo">{{ errors.photo[0] }}</small>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -138,7 +150,7 @@
                     region:null,
                     labLocationId:null,
                     isActive:false,
-
+                    description:null
 				},
                 labLocations:[],
                 region:{
@@ -170,10 +182,11 @@
                 this.form.region=this.region.value
                 this.form.labLocationId=this.region.key
                 const formDate=new FormData();
-                console.log(formDate);
                 Object.entries(this.form).forEach(([key, value]) => {
                     console.log(key+" "+value);
+                    if(value !== null){
                     formDate.append(key, value);
+                    }
                 });
 				axios.post('/lab/admin/add/lab',formDate,{headers : {
                 'Content-Type': 'multipart/form-data',
@@ -184,8 +197,20 @@
 					Notification.success()
 				})
 				.catch((error) => {
+                    let statusCode = error.response.status
+                    console.log(statusCode)
+                    if(statusCode == 422){
                     console.log(error.response.data);
-                    this.errors = error.response.data.data;
+                    this.errors = error.response.data.data.result;
+                    }
+                    else if(statusCode == 401){
+                        AppStorage.clear()
+                        this.$router.push({name:'/'})
+                    }
+                    else
+                    {
+                        Notification.error();
+                    }
                 })
 			},
 
