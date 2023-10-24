@@ -6192,17 +6192,25 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('/lab/offer/delete/' + offerId).then(function () {
+          axios["delete"]('/lab/offer/delete/' + offerId, {
+            headers: {
+              Authorization: 'Bearer ' + sessionStorage.getItem('token')
+            }
+          }).then(function () {
             _this3.offers = _this3.offers.filter(function (offer) {
               return offer.offerId != offerId;
             });
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
           })["catch"](function (error) {
             console.log(error.response);
             _this3.$router.push({
               name: 'supplier'
             });
+            Toast.fire({
+              icon: 'warning',
+              title: 'please try later or contact with us'
+            });
           });
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
         }
       });
     }

@@ -119,21 +119,31 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value) {
-                        axios.delete('/lab/offer/delete/'+offerId)
+                        axios.delete('/lab/offer/delete/'+offerId,
+                             {
+                            headers:{
+                                Authorization: 'Bearer '+sessionStorage.getItem('token')
+                            }
+                            })
                             .then(()=>{
                                 this.offers = this.offers.filter(offer =>{
                                     return offer.offerId !=offerId
                                 })
+                            Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            )
                             })
                             .catch((error)=>{
                                 console.log(error.response)
                                 this.$router.push({name: 'supplier'})
+                            Toast.fire({
+                            icon: 'warning',
+                            title: 'please try later or contact with us'
                             })
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
+                            })
+
                     }
                 })
             }
