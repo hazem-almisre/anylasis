@@ -19,9 +19,7 @@ class OfferController extends Controller
     {
         try{
         $date=date('Y-m-d');
-        $offers= Offer::query()->where('dateEnd','>=',$date)->with('analysis',function($q){
-           $q->select( "lable","price","description","labId");
-        })->orderBy('dateEnd')->get();
+        $offers= Offer::query()->where('dateEnd','>=',$date)->with('analysis')->orderBy('dateEnd')->get();
         return parent::sendRespons(['result'=>$offers],ResponseMessage::$getLabLocations);
         } catch (\Throwable $th) {
             return parent::sendError($th->getMessage(),parent::getPostionError(OfferController::class,19),500) ;
@@ -86,6 +84,7 @@ class OfferController extends Controller
         try {
             $offer = Offer::query()->where('offerId','=',$offerId)->first();
             $photo = $offer->photo;
+            $photo=Str::afterLast($photo, '/storage/');
             if(Storage::exists($photo))
             Storage::delete($photo);
             $offer->delete();

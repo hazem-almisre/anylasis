@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Flutter\User;
 use App\User;
+use App\Models\Lab;
 use App\Models\Analysis;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Message\ResponseMessage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FlutterUpdateUserResquest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Hash;
 use function PHPUnit\Framework\isNull;
 use function PHPUnit\Framework\isEmpty;
-use App\Http\Requests\FlutterUserLoginRequest;
-use App\Http\Requests\FlutterUserRegisterRequest;
-use App\Models\Lab;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\FlutterUserLoginRequest;
+use App\Http\Requests\FlutterUpdateUserResquest;
+use App\Http\Requests\FlutterUserRegisterRequest;
 
 class UserAuthController extends Controller
 {
@@ -118,8 +119,9 @@ class UserAuthController extends Controller
                 $fileName = time() . rand(1, 999999) . '.' . $format;
                 $path = 'userImage/' . $fileName;
                 $image->storeAs('userImage', $fileName);
-                if(Storage::exists($user->photo)){
-                    Storage::delete($user->photo);
+                $photo=Str::afterLast($user->photo, '/storage/');
+                if($photo!=null && Storage::exists($photo)){
+                    Storage::delete($photo);
                 }
                 $path=Storage::disk('public')->url($path);
                 $user->photo=$path;

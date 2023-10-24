@@ -32,8 +32,9 @@ class NurseController extends Controller
                     $fileName = time() . rand(1, 999999) . '.' . $format;
                     $path = 'nurseImage/' . $fileName;
                     $image->storeAs('nurseImage', $fileName);
-                    if(Storage::exists($user->photo)){
-                        Storage::delete($user->photo);
+                    $photo=Str::afterLast($user->photo, '/storage/');
+                    if($photo!=null && Storage::exists($photo)){
+                        Storage::delete($photo);
                     }
                     $path=Storage::disk('public')->url($path);
                     $user->photo=$path;
