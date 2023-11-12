@@ -28,7 +28,7 @@ class FlutterUserRegisterRequest extends FormRequest
         return [
                 'phone'=>['string','required','unique:users,phone'],
                 'name'=>['string','required','max:255'],
-                'password'=>['string','required','min:8'],
+                // 'password'=>['string','required','min:8'],
                 'notification_token'=>['string','required'],
 
         ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BecomNurseController;
 use App\User;
 use App\Models\Nurse;
 use App\Http\Controllers\Helper\NotifictionHelper;
@@ -51,6 +52,8 @@ Route::post('rate/add',[RatingUserController::class,'store'])->middleware('auth:
 
 Route::get('get/all/offer', [OfferController::class,'index']);
 
+Route::post('becomeNurse', [BecomNurseController::class,'store'])->middleware('auth:api');
+
 Route::group(['prefix'=>'user' , 'middleware'=>'auth:api'],function () {
     Route::get('get',[UserAuthController::class,'getUser']);
 
@@ -62,7 +65,7 @@ Route::group(['prefix'=>'order' , 'middleware'=>'auth:api'],function () {
 
     Route::get('getByStatus',[OrderUserController::class,'getOrderByStatus']);
 
-    Route::post('changeStatus',[OrderUserController::class,'changeOrderStatus']); // add it in postman to test
+    // Route::post('changeStatus',[OrderUserController::class,'changeOrderStatus']); // add it in postman to test
 
 });
 

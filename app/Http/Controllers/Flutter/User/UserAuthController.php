@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers\Flutter\User;
 use App\User;
-use App\Models\Lab;
-use App\Models\Analysis;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Message\ResponseMessage;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use function PHPUnit\Framework\isNull;
-use function PHPUnit\Framework\isEmpty;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\FlutterUserLoginRequest;
 use App\Http\Requests\FlutterUpdateUserResquest;
 use App\Http\Requests\FlutterUserRegisterRequest;
+use App\Models\Nurse;
 
 class UserAuthController extends Controller
 {
@@ -26,7 +22,7 @@ class UserAuthController extends Controller
             $data = array();
             $data['name'] = $request->name;
             $data['phone'] = $request->phone;
-            $data['password'] = Hash::make($request->password);
+            // $data['password'] = Hash::make($request->password);
             $data['socId']='1';
             $data['notification_token']=$request->notification_token;
 
@@ -59,22 +55,40 @@ class UserAuthController extends Controller
     {
     try {
         $guard='api';
-        $credentials = request(['phone', 'password']);
+        $credentials = request(['phone']);
 
         $token='';
         if($request['socId']=='UserType.user')
         {
-        if (! $token = auth($guard)->attempt($credentials)) {
+            $isUser=$this->myCustomAuth($request->phone,$request->socId);
+        if($isUser){
+            $token=JWTAuth::fromUser($isUser);
+            auth()->login($isUser);
+        }
+        else {
             return Controller::sendError(null,ResponseMessage::$loginErrorMessage);
         }
         }
         else if($request['socId']=='UserType.nurse'){
             $guard='nurse';
-            if (! $token = auth($guard)->attempt($credentials)) {
+            $isUser=$this->myCustomAuth($request->phone,$request->socId);
+            if($isUser){
+                $token=JWTAuth::fromUser($isUser);
+                auth($guard)->login($isUser);
+            }
+            else {
                 return Controller::sendError(null,ResponseMessage::$loginErrorMessage);
             }
         }
         else if($request['socId']=='UserType.lab'){
+            if($request->has('password'))
+            {
+                $credentials['password']=$request->password;
+            }
+            else
+            {
+                return Controller::sendError(null,ResponseMessage::$loginUndifinedUser);
+            }
             $guard='lab';
             if (! $token = auth($guard)->attempt($credentials)) {
                 return Controller::sendError(null,ResponseMessage::$loginErrorMessage);
@@ -135,4 +149,25 @@ class UserAuthController extends Controller
             return parent::sendError($th->getMessage(),parent::getPostionError(UserAuthController::class,114),500);
         }
     }
+
+        public function logout()
+        {
+            auth()->logout();
+            return parent::sendRespons(['result'=>[]],ResponseMessage::$registerSuccessfullMessage,200);
+        }
+
+        function myCustomAuth($phone,$type){
+            if($type=='UserType.user')
+            $user= User::query()->where('phone','=',$phone)->get();
+            else
+            $user=Nurse::query()->where('phone','=',$phone)->get();
+            if(count($user)!=1)
+            {
+                return false;
+            }
+            else
+            {
+                return $user[0];
+            }
+        }
 }

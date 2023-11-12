@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Flutter\Nurse\NurseController as FlutterNurseController;
+use App\Http\Controllers\Flutter\Order\OrderNurseController;
+use App\Http\Controllers\Flutter\Order\OrderUserController;
 use App\Http\Controllers\Web\NurseController;
 use Illuminate\Support\Facades\Route;  //--Eita dile ar "route" er niche error er red-wave ta r show kore na.
 
@@ -28,7 +30,14 @@ Route::group(['prefix'=>'web','middleware'=>'auth:api'],function () {
 Route::group(['prefix'=>'nurse' , 'middleware'=>'auth:nurse'],function () {
     Route::get('get',[FlutterNurseController::class,'getNurse']);
 
-    Route::post('update',[FlutterNurseController::class,'updateNurse']);
+    // Route::post('update',[FlutterNurseController::class,'updateNurse']);
+});
+
+Route::group(['prefix'=>'order' , 'middleware'=>'auth:nurse'],function () {
+    Route::get('getByStatus',[OrderNurseController::class,'getOrderByStatus']);
+
+    Route::post('changeStatus',[OrderUserController::class,'changeOrderStatus']); // add it in postman to test
+
 });
 
 Route::post('accepted',[FlutterNurseController::class,'acceptedOrder']);

@@ -22,15 +22,19 @@ class Nurse extends Authenticatable implements JWTSubject
         'address',
         'phone',
         'ratio',
-        'password',
+        // 'password',
         'photo',
         'socId',
         'isActive',
         'notification_token'
     ];
 
+    protected $casts = [
+        'isActive' => 'bool',
+    ];
+
     protected $hidden = [
-        'password',
+        // 'password',
         'phoneEnter',
     ];
 
@@ -73,6 +77,16 @@ class Nurse extends Authenticatable implements JWTSubject
         "
          ;
         return DB::select($query);
+    }
+
+    /**
+     * Get all of the labsLocation for the Nurse
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function labsLocation()
+    {
+        return $this->hasManyThrough(LabLocation::class, DoctorAreas::class,'nurseId','labLocationId','nurseId','labLocationId');
     }
 
 }

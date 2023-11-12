@@ -8,13 +8,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FlutterNurseAcceptOrder;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\FlutterUpdateNurseResquest;
+use App\Models\Nurse;
 use Illuminate\Support\Facades\DB;
 
 class NurseController extends Controller
 {
     public function getNurse() {
         try{
-            $user = auth('nurse')->user();
+            $userId = auth('nurse')->id();
+            $user=Nurse::query()->findOrFail($userId)->with('labsLocation')->get();
             return parent::sendRespons(['result'=>$user],ResponseMessage::$registerSuccessfullMessage,200);
         } catch (\Throwable $th) {
             return parent::sendError($th->getMessage(),parent::getPostionError(NurseController::class,98),500);

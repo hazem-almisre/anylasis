@@ -25,6 +25,11 @@ class OrderUserController extends Controller
             $userId = auth()->id();
             $isFrequency=false;
             $numberCount=count($request['lines']);
+             $date=date('Y-m-d H:i',intval($request->date));
+             $dateNow=date('Y-m-d H:i');
+             if($date<$dateNow){
+                return parent::sendError(null,ResponseMessage::$dateIsOld);
+             }
             if ($numberCount>1) {
                 $isFrequency=true;
             }
@@ -41,6 +46,11 @@ class OrderUserController extends Controller
 
             $lines=[];
             for ($i=0; $i < $numberCount; $i++) {
+                $date=date('Y-m-d H:i',intval($request['lines'][$i]['dateStart']));
+                if($date<$dateNow){
+                    DB::rollBack();
+                    return parent::sendError(null,ResponseMessage::$dateIsOld);
+                 }
                 $lines[]=Line::query()->create([
                     'dateStart'=>$request['lines'][$i]['dateStart'],
                     'analysis'=>$request['lines'][$i]['analysis'],
@@ -76,33 +86,33 @@ class OrderUserController extends Controller
         }
     }
 
-    public function changeOrderStatus(FlutterOrderChangeStatusResquest $request)
-    {
-        try{
-         $order = OrderApi::query()->findOrFail($request->orderId);
-         $lines = $order->lines;
-         $orderFinish = true;
-         foreach ($lines as $value)
-         {
-            if($value->lineId == $request->lineId){
-                $value->status=$request->status;
-                $value->save();
-            }
-            if($value->status != "finish")
-            {
-                $orderFinish = false;
-            }
-         }
-         if($orderFinish){
-            $order->status = 'finish';
-            $order->save();
-         }
-         return parent::sendRespons(['result'=>[]],ResponseMessage::$registerNurseSuccessfullMessage);
-        }
-        catch (\Throwable $th) {
-            return parent::sendError($th->getMessage(),parent::getPostionError(OrderUserController::class,83),500) ;
-        }
-    }
+    // public function changeOrderStatus(FlutterOrderChangeStatusResquest $request)
+    // {
+    //     try{
+    //      $order = OrderApi::query()->findOrFail($request->orderId);
+    //      $lines = $order->lines;
+    //      $orderFinish = true;
+    //      foreach ($lines as $value)
+    //      {
+    //         if($value->lineId == $request->lineId){
+    //             $value->status=$request->status;
+    //             $value->save();
+    //         }
+    //         if($value->status != "finish")
+    //         {
+    //             $orderFinish = false;
+    //         }
+    //      }
+    //      if($orderFinish){
+    //         $order->status = 'finish';
+    //         $order->save();
+    //      }
+    //      return parent::sendRespons(['result'=>[]],ResponseMessage::$registerNurseSuccessfullMessage);
+    //     }
+    //     catch (\Throwable $th) {
+    //         return parent::sendError($th->getMessage(),parent::getPostionError(OrderUserController::class,83),500) ;
+    //     }
+    // }
 
 
 }

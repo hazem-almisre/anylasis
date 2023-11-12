@@ -6,14 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class FlutterUserLoginRequest extends FormRequest
+class AddBecomeNurseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,22 +19,24 @@ class FlutterUserLoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules()
     {
         return [
-                'phone'=>['string','required'],
-                'socId'=>['string','required'],
-                // 'password'=>['string','required','min:8'],
-                'token'=>['string','nullable'],
+            'name'=>['required','string'],
+            'phone'=>['required','numeric'],
+            'position'=>['required','string'],
+            'degree'=>['required','string'],
+
         ];
+
     }
 
     public function messages()
     {
         return [
-            'phone.required'=>"الهاتف مطلوب"
+            'name.required'=>"الاسم مطلوب"
         ];
     }
 
@@ -46,6 +46,4 @@ class FlutterUserLoginRequest extends FormRequest
         $response = Controller::sendError(['result'=>$errors->messages()],'invald data input',422);
         throw new HttpResponseException($response);
     }
-
-
 }

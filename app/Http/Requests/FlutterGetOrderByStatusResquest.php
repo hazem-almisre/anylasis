@@ -27,6 +27,7 @@ class FlutterGetOrderByStatusResquest extends FormRequest
     {
         return [
             'status'=>['required','in:prosessing,finish,prosessing'],
+            'date'=>['nullable','date_format:Y-m-d']
         ];
     }
 
