@@ -135,21 +135,21 @@
                         </div>
                       </div>
 
-                    <!--------------Categories----------->
+                    <!--------------Labs----------->
                             <div class="accordion-item " id="categories" style="display: none">
                                 <h2 class="accordion-header" id="headingThree">
                                   <button class="accordion-button bg-dark text-light "  type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                    Categories
+                                    Labs
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                   </button>
                                 </h2>
                                 <div id="collapseThree" class="accordion-collapse collapse " aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                                   <div class="accordion-body bg-dark text-light" style="padding: 0%;margin: 0%;">
                                     <ul class='list-unstyled bg-dark' style="margin: 0">
-                                        <li><router-link class="nav-link" to="/store-category">Add Category</router-link></li>
+                                        <li><router-link class="nav-link" to="/store-category">Add Labs</router-link></li>
                                         <div class="dropdown-divider text-black"></div>
-                                        <li><router-link class="nav-link" to="/category">All Category</router-link></li>
+                                        <li><router-link class="nav-link" to="/category">All Labs</router-link></li>
                                     </ul>
                                     </div>
                                 </div>
@@ -174,70 +174,6 @@
                                     </div>
                                 </div>
                               </div>
-
-                    <!--------------Customer----------->
-                            <div class="accordion-item ">
-                                <h2 class="accordion-header" id="heading5">
-                                  <button class="accordion-button bg-dark text-light "  type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                    Customers
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                  </button>
-                                </h2>
-                                <div id="collapse5" class="accordion-collapse collapse " aria-labelledby="heading5" data-bs-parent="#sidenavAccordion">
-                                  <div class="accordion-body bg-dark text-light" style="padding: 0%;margin: 0%;">
-                                    <ul class='list-unstyled bg-dark' style="margin: 0">
-                                        <li>  <router-link class="nav-link" to="/store-Customer">Add Customer</router-link></li>
-                                        <div class="dropdown-divider text-black"></div>
-                                        <li><router-link class="nav-link" to="/Customer">All Customer</router-link></li>
-                                    </ul>
-                                    </div>
-                                </div>
-                              </div>
-
-                    <!--------------Salary----------->
-                            <div class="accordion-item ">
-                                <h2 class="accordion-header" id="heading7">
-                                  <button class="accordion-button bg-dark text-light "  type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                    Salary
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                  </button>
-                                </h2>
-                                <div id="collapse7" class="accordion-collapse collapse " aria-labelledby="heading7" data-bs-parent="#sidenavAccordion">
-                                  <div class="accordion-body bg-dark text-light" style="padding: 0%;margin: 0%;">
-                                    <ul class='list-unstyled bg-dark' style="margin: 0">
-                                        <li><router-link class="nav-link" to="/given-salary">Pay Salary</router-link></li>
-                                        <div class="dropdown-divider text-black"></div>
-                                        <li><router-link class="nav-link" to="/salary">All Salary</router-link></li>
-                                    </ul>
-                                    </div>
-                                </div>
-                              </div>
-                    <!--------------Orders----------->
-                            <div class="accordion-item ">
-                                <h2 class="accordion-header" id="heading7">
-                                  <button class="accordion-button bg-dark text-light "  type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                    Orders
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                  </button>
-                                </h2>
-                                <div id="collapse8" class="accordion-collapse collapse " aria-labelledby="heading7" data-bs-parent="#sidenavAccordion">
-                                  <div class="accordion-body bg-dark text-light" style="padding: 0%;margin: 0%;">
-                                    <ul class='list-unstyled bg-dark' style="margin: 0">
-                                        <li><router-link class="nav-link" to="/order">Today Order</router-link></li>
-                                        <div class="dropdown-divider text-black"></div>
-                                        <li> <router-link class="nav-link" to="/searchorder">Search</router-link></li>
-                                    </ul>
-                                    </div>
-                                </div>
-                              </div>
-                    <!--------------Stock----------->
-                            <router-link class="nav-link collapsed" to="/stock">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Stock
-                            </router-link>
 
                         </div>
                     </div>

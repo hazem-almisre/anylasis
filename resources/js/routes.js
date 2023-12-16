@@ -16,10 +16,10 @@ let editEmployee = require('./components/employee/edit.vue').default;
 let storeRegion = require('./components/region/create.vue').default;
 let Region = require('./components/region/index.vue').default;
 let editRegion = require('./components/region/edit.vue').default;
-//--------Supplier_Components--------------- as offer
-let storeSupplier = require('./components/supplier/create.vue').default;
-let Supplier = require('./components/supplier/index.vue').default;
-let editSupplier = require('./components/supplier/edit.vue').default;
+//--------Offers_Components--------------- as offer
+let storeOffer = require('./components/offers/create.vue').default;
+let Offer = require('./components/offers/index.vue').default;
+let editOffer = require('./components/offers/edit.vue').default;
 //-------Category_Components---------------
 let storecategory = require('./components/category/create.vue').default;
 let category = require('./components/category/index.vue').default;
@@ -29,10 +29,6 @@ let labProfile = require('./components/lab_profile.vue').default;
 let storeproduct = require('./components/product/create.vue').default;
 let product = require('./components/product/index.vue').default;
 let editproduct = require('./components/product/edit.vue').default;
-//-------Expense_Components---------------
-let storeexpense = require('./components/expense/create.vue').default;
-let expense = require('./components/expense/expense.vue').default;
-let editexpense = require('./components/expense/edit.vue').default;
 //-------Salary_Components----------------
 let salary = require('./components/salary/all_employee.vue').default;
 let paysalary = require('./components/salary/create.vue').default;
@@ -46,8 +42,6 @@ let stock = require('./components/product/stock.vue').default;
 let storeCustomer = require('./components/customer/create.vue').default;
 let Customer = require('./components/customer/index.vue').default;
 let editCustomer = require('./components/customer/edit.vue').default;
-//------point_of_sale-----------------------
-let pos = require('./components/pos/pointofsale.vue').default;
 //------Orders_Components-----------------------
 let order = require('./components/order/order.vue').default;
 let vieworder = require('./components/order/viewOrder.vue').default;
@@ -72,9 +66,9 @@ export const routes = [
     { path: '/region', component: Region, name:'region' },   //route'r sate 'path' working,'name' not working
     { path: '/edit-region/:id', component: editRegion, name:'edit-region' },
     //-------Supplier_routes-----------
-    { path: '/store-supplier', component: storeSupplier, name:'store-supplier' },
-    { path: '/supplier', component: Supplier, name:'supplier' },
-    { path: '/edit-supplier/:id', component: editSupplier, name:'edit-supplier' },
+    { path: '/store-supplier', component: storeOffer, name:'store-supplier' },
+    { path: '/supplier', component: Offer, name:'supplier' },
+    { path: '/edit-supplier/:id', component: editOffer, name:'edit-supplier' },
     //-------Category_routes-----------
     { path: '/store-category', component: storecategory, name:'store-category' },
     { path: '/category', component: category, name:'category' },
@@ -84,10 +78,6 @@ export const routes = [
     { path: '/store-product', component: storeproduct, name:'store-product' },
     { path: '/product', component: product, name:'product' },
     { path: '/edit-product/:id', component: editproduct, name:'edit-product' },
-    //-------Expense_routes-----------
-    { path: '/store-expense', component: storeexpense, name:'store-expense' },
-    { path: '/expense', component: expense, name:'expense' },
-    { path: '/edit-expense/:id', component: editexpense, name:'edit-expense' },
     //-------Salary_routes------------
     { path: '/given-salary', component: salary, name:'given-salary' },
     { path: '/pay-salary/:id', component: paysalary, name:'pay-salary' },
@@ -101,8 +91,6 @@ export const routes = [
     { path: '/store-Customer', component: storeCustomer, name:'store-Customer' },
     { path: '/Customer', component: Customer, name:'Customer' },
     { path: '/edit-Customer/:id', component: editCustomer, name:'edit-Customer' },
-    //-------point of sale-----------
-    { path: '/pos', component: pos, name:'pos' },
     //-------Order-----------
     { path: '/order', component: order, name:'order' },
     { path: '/view-order/:id', component: vieworder, name:'view-order' },

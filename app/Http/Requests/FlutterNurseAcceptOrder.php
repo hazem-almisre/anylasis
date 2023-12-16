@@ -24,7 +24,7 @@ class FlutterNurseAcceptOrder extends FormRequest
     public function rules()
     {
         return [
-            'orderId'=>['string','required']
+            'orderId'=>['integer','required']
         ];
     }
 

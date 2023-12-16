@@ -11,7 +11,7 @@ class NotifictionHelper extends Controller
 
 
         $SERVER_API_KEY = "AAAAumSSWB0:APA91bGeUOfF76eM_aTMv8ju8B320SfHwrf1E5EHoQmHNV7neeoehMZZzAn6TrC6MQ9mn19AanUMjQfE9ukCIe-6xVopfRNy1n1VZ2Up2Bnthm-D2ZAzCL-hFSJR4llx7rSN-F77Jle3";//env('FCM_KEY');
-        
+
 
         $data = [
 

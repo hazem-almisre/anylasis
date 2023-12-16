@@ -21,6 +21,16 @@ class OrderApi extends Model
         'status'
     ];
 
+        /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     protected $casts = ['isFrequency' => 'boolean'];
     /**
      * Get the nurse that owns the OrderApi
@@ -70,5 +80,15 @@ class OrderApi extends Model
     public function lines()
     {
         return $this->hasMany(Line::class, 'orderId', 'orderId');
+    }
+
+    /**
+     * Get the rating associated with the OrderApi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function rating()
+    {
+        return $this->hasOne(Rating::class, 'orderId', 'orderId');
     }
 }

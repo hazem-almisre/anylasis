@@ -36,8 +36,9 @@ Route::group(['prefix'=>'nurse' , 'middleware'=>'auth:nurse'],function () {
 Route::group(['prefix'=>'order' , 'middleware'=>'auth:nurse'],function () {
     Route::get('getByStatus',[OrderNurseController::class,'getOrderByStatus']);
 
-    Route::post('changeStatus',[OrderUserController::class,'changeOrderStatus']); // add it in postman to test
+    Route::post('changeStatus',[OrderNurseController::class,'changeOrderStatus']); // add it in postman to test
 
 });
 
-Route::post('accepted',[FlutterNurseController::class,'acceptedOrder']);
+Route::post('accepted',[FlutterNurseController::class,'acceptedOrder'])->middleware('auth:nurse');
+    

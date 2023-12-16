@@ -44,14 +44,13 @@ class OrderUserController extends Controller
                 'status'=>"prosessing",
             ]);
 
-            $lines=[];
             for ($i=0; $i < $numberCount; $i++) {
                 $date=date('Y-m-d H:i',intval($request['lines'][$i]['dateStart']));
                 if($date<$dateNow){
                     DB::rollBack();
                     return parent::sendError(null,ResponseMessage::$dateIsOld);
                  }
-                $lines[]=Line::query()->create([
+                Line::query()->create([
                     'dateStart'=>$request['lines'][$i]['dateStart'],
                     'analysis'=>$request['lines'][$i]['analysis'],
                     'price'=>$request['lines'][$i]['price'],
@@ -59,9 +58,11 @@ class OrderUserController extends Controller
                     'orderId'=>$order->orderId
                 ]);
             }
-            $order['lines']=$lines;
+            $order->lines;
+            $order->contact;
+            $order->lab;
             DB::commit();
-             SelectNurse::dispatch($request->contactId,$request->labId,$order);
+             SelectNurse::dispatch($order);
             return parent::sendRespons(['result'=>$order->orderId],ResponseMessage::$registerNurseSuccessfullMessage);
         } catch (\Throwable $th) {
             DB::rollBack();

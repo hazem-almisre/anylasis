@@ -16,15 +16,18 @@ class OrderNurseController extends Controller
         try{
         $nurseId = auth('nurse')->id();
         if($request->status == "finish"){
-         $orders = OrderApi::query()->where('nurseId','=', $nurseId)->where('status','=' , $request->status)->with('contact')->with('lab')->paginate(10);
+         $orders = OrderApi::query()->where('nurseId','=', $nurseId)->where('status','=' , $request->status)->with('contact')->with('lab')
+         ->with('lines')->paginate(10);
          return parent::sendRespons(['result'=>$orders->items()],ResponseMessage::$registerNurseSuccessfullMessage);
         }
         else if($request->status == "prosessing"){
-            if ($request->has('date')) {
+            if (!$request->has('date')) {
                 return parent::sendError(null,"date must be exits");
             }
             else {
-                $orders = OrderApi::query()->where('nurseId','=', $nurseId)->where('date','=',$request->date)->where('status','=' , $request->status)->with('contact')->with('lab')->paginate(10);
+                $date=strtotime($request->date);
+                $orders = OrderApi::query()->where('nurseId','=', $nurseId)->where('date','=',$date)->where('status','=' , $request->status)
+                ->with('contact')->with('lab')->with('lines')->paginate(10);
                 return parent::sendRespons(['result'=>$orders->items()],ResponseMessage::$registerNurseSuccessfullMessage);
             }
         }

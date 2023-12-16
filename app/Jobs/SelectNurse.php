@@ -22,14 +22,11 @@ class SelectNurse implements ShouldQueue
      *
      * @return void
      */
-    private $contactId;
-    private $labId;
-    private $orderWithLines;
-    public function __construct($contactId,$labId,$orderWithLines)
+
+    private $data;
+    public function __construct($data)
     {
-        $this->contactId=$contactId;
-        $this->labId=$labId;
-        $this->orderWithLines=$orderWithLines;
+        $this->data=$data;
     }
 
     /**
@@ -39,11 +36,11 @@ class SelectNurse implements ShouldQueue
      */
     public function handle()
     {
-        $region = Contact::query()->select('region')->findOrFail($this->contactId);
-        $nurses=Nurse::selectNurseOrder($region->region,$this->labId);
+        $nurses=Nurse::selectNurseOrder($this->data['contact']['region'],$this->data['lab']['labId']);
+        // print_r($nurses);
         foreach ($nurses as $value) {
             if($value->isActive){
-                NotifictionHelper::send_notification_FCM($value->notification_token,'new Order',"recive Order",$value->nurseId,'order',$this->orderWithLines);
+                NotifictionHelper::send_notification_FCM($value->notification_token,'new Order',"recive Order",$value->nurseId,'order',$this->data);
             }
         }
 

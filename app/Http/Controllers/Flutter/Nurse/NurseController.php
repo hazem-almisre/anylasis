@@ -9,6 +9,7 @@ use App\Http\Requests\FlutterNurseAcceptOrder;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\FlutterUpdateNurseResquest;
 use App\Models\Nurse;
+use App\Models\OrderApi;
 use Illuminate\Support\Facades\DB;
 
 class NurseController extends Controller
@@ -51,15 +52,19 @@ class NurseController extends Controller
 
     public function acceptedOrder(FlutterNurseAcceptOrder $request) {
         try {
-            $order=DB::table('order_apis')->select('nurseId')->where('orderId','=',$request->orderId)->lockForUpdate()->first();
-            if($order['nurseId'] !=null)
+            $order=OrderApi::where('orderId','=',$request->orderId)->first();
+            if($order !=null && $order->nurseId ==null)
             {
-                $order['nurseId']=auth('nurse')->id();
-                $order->unlock();
-                return parent::sendRespons(['result'=>[]],ResponseMessage::$acceptedNurse,200);
+                $order->lockForUpdate();
+                $order->nurseId=auth('nurse')->id();
+                $order->save();
+                $order->unlock;
+                return parent::sendRespons(['result'=>$order->orderId],ResponseMessage::$acceptedNurse,200);
             }
-            $order->unlock();
-            return parent::sendRespons(['result'=>[]],ResponseMessage::$notAcceptedNurse,200);
+            else{
+                $order->unlock;
+            return parent::sendRespons(['result'=>$order->orderId],ResponseMessage::$notAcceptedNurse,200);
+            }
         } catch (\Throwable $th) {
             return parent::sendError($th->getMessage(),parent::getPostionError(NurseController::class,60),500);
         }
