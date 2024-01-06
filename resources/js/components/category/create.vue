@@ -5,7 +5,7 @@
 			<li class="breadcrumb-item">
 				<a href="#">Dashboard</a>
 			</li>
-			<li class="breadcrumb-item active">Employee / Add</li>
+			<li class="breadcrumb-item active">Lab / Add</li>
 		</ol>
 
 		<!-- Icon Cards-->
@@ -14,7 +14,7 @@
 				<div class="card-header text-white bg-dark" style="font-size: 20px; font-weight: 700;">  <!------f----->
 					<i class="fas fa-chart-area"></i>
 					Lab Insert
-					<router-link to="/employee" class="btn btn-success"
+					<router-link to="/category" class="btn btn-success"
                     style="
                         border-radius: 20px;
                     " id="add_new"> All Labs</router-link>  <!----------->

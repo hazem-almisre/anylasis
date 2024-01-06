@@ -31,15 +31,9 @@
                         <small class="text-danger" v-if="errors.region">{{ errors.region[0] }}</small>
                     </div>
 
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-                            <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
-                        </div>
-                    </div>
                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <router-link to="/forget">Forgot Password?</router-link>
-                        <button type="submit" class="btn btn-primary"> Login </button>
+                        <!-- <router-link to="/forget">Forgot Password?</router-link> -->
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"> Login </button>
                     </div>
                 </form>
 
@@ -99,7 +93,7 @@
                     else if(result.type === 'lab'){
                     User.responseAfterLogin(result)
                     this.$router.push({name:'lab'})
-                    } 
+                    }
                     else{
                          Toast.fire({
                         icon: 'warning',

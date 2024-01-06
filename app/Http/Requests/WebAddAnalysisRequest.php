@@ -29,7 +29,7 @@ class WebAddAnalysisRequest extends FormRequest
         return [
                 'lable'=>['string','required','unique:analyses,lable'],
                 'price'=>['integer','required'],
-                'secondPrice'=>['integer','nullable'],
+                'secondPrice'=>['integer','nullable','lt:price'],
                 'description'=>['string','required'],
         ];
     }

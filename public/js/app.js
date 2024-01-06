@@ -4379,7 +4379,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       },
       labLocations: [],
       region: {
-        key: null,
+        key: 0,
         value: null
       },
       image: '',
@@ -4443,9 +4443,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       }).then(function (response) {
         console.log(response.data);
         _this3.form = response.data.data.result;
-        _this3.image = 'storage/' + _this3.form.photo;
+        _this3.image = _this3.form.photo;
+        console.log(_this3.form);
         _this3.region.value = _this3.form.region;
-        _this3.region.key = _this3.form.labLocationId;
       })["catch"](function (error) {
         console.log(error);
         _this3.errors = error.data.data;
@@ -6038,18 +6038,7 @@ var render = function render() {
     }
   }, [_vm._v("Lab")])]), _vm._v(" "), _vm.errors.region ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.region[0]))]) : _vm._e()]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
-    staticClass: "form-group d-flex align-items-center justify-content-between mt-4 mb-0"
-  }, [_c("router-link", {
-    attrs: {
-      to: "/forget"
-    }
-  }, [_vm._v("Forgot Password?")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v(" Login ")])], 1)])])])])])])]);
+  }, [_vm._v(_vm._s(_vm.errors.region[0]))]) : _vm._e()]), _vm._v(" "), _vm._m(1)])])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -6063,21 +6052,16 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "form-group"
-  }, [_c("div", {
-    staticClass: "custom-control custom-checkbox"
-  }, [_c("input", {
-    staticClass: "custom-control-input",
+    staticClass: "form-group d-flex align-items-center justify-content-between mt-4 mb-0"
+  }, [_c("button", {
+    staticClass: "btn btn-primary",
+    staticStyle: {
+      width: "100%"
+    },
     attrs: {
-      id: "rememberPasswordCheck",
-      type: "checkbox"
+      type: "submit"
     }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "custom-control-label",
-    attrs: {
-      "for": "rememberPasswordCheck"
-    }
-  }, [_vm._v("Remember password")])])]);
+  }, [_vm._v(" Login ")])]);
 }];
 render._withStripped = true;
 
@@ -6350,7 +6334,7 @@ var render = function render() {
       "border-radius": "20px"
     },
     attrs: {
-      to: "/employee",
+      to: "/category",
       id: "add_new"
     }
   }, [_vm._v(" All Labs")])], 1), _vm._v(" "), _c("div", {
@@ -6750,7 +6734,7 @@ var staticRenderFns = [function () {
     }
   }, [_vm._v("Dashboard")])]), _vm._v(" "), _c("li", {
     staticClass: "breadcrumb-item active"
-  }, [_vm._v("Employee / Add")])]);
+  }, [_vm._v("Lab / Add")])]);
 }];
 render._withStripped = true;
 
@@ -7219,7 +7203,7 @@ var staticRenderFns = [function () {
     }
   }, [_vm._v("Dashboard")])]), _vm._v(" "), _c("li", {
     staticClass: "breadcrumb-item active"
-  }, [_vm._v("All Employee")])]);
+  }, [_vm._v("All Labs")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;

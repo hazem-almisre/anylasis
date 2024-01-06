@@ -29,7 +29,7 @@ class WebAddOfferRequest extends FormRequest
                 'dateEnd'=>['date_format:Y-m-d','required'],
                 'photo'=>['required','image','mimes:jpeg,jpg,png,gif'],
                 'priceBeforOffer'=>['integer','required'],
-                'priceAfterOffer'=>['integer','required'],
+                'priceAfterOffer'=>['integer','required','lt:priceBeforOffer'],
                 'analysisCount'=>['integer','required'],
                 'analysisIds.*'=>['integer','required'],
         ];

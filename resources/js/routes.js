@@ -12,6 +12,7 @@ let lab = require('./components/lab.vue').default;
 let storeEmployee = require('./components/employee/create.vue').default;
 let employee = require('./components/employee/index.vue').default;
 let editEmployee = require('./components/employee/edit.vue').default;
+let chooseLabs = require('./components/category/chooseLab.vue').default;
 //--------region Lab---------------
 let storeRegion = require('./components/region/create.vue').default;
 let Region = require('./components/region/index.vue').default;
@@ -60,7 +61,8 @@ export const routes = [
     //-------Employee_routes-------
     { path: '/store-employee', component: storeEmployee, name:'store-employee' },
     { path: '/employee', component: employee, name:'employee' },   //route'r sate 'path' working,'name' not working
-    { path: '/edit-employee/:id', component: editEmployee, name:'edit-employee' },  //-------------------
+    { path: '/edit-employee/:id', component: editEmployee, name:'edit-employee' },
+    { path: '/choose/lab/:employee', component: chooseLabs , name:'chooes-lab'},
     //-------region_routes-------
     { path: '/store-region', component: storeRegion, name:'store-region' },
     { path: '/region', component: Region, name:'region' },   //route'r sate 'path' working,'name' not working

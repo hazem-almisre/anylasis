@@ -10,7 +10,7 @@
 
 		<!-- Icon Cards-->
 		<div class="row ml-3 mr-3">
-			<div class="card col-12 shadow" style="padding: 0;">	    <!--------f------->
+			<div class="card col-12 shadow" style="padding: 0;">	    <!--------f-------->
 				<div class="card-header text-white bg-dark" style="font-size: 20px; font-weight: 700;">  <!------f----->
 					<i class="fas fa-chart-area"></i>
 					Employee Insert
@@ -130,7 +130,7 @@
 				},
                 labLocations:[],
                 region:{
-                    key:null,
+                    key:0,
                     value:null,
                 },
                 image:'',
@@ -184,9 +184,9 @@
                 .then((response)=>{
                     console.log(response.data)
                     this.form=response.data.data.result
-                    this.image='storage/'+this.form.photo
+                    this.image=this.form.photo
+                    console.log(this.form)
                     this.region.value= this.form.region
-                    this.region.key=this.form.labLocationId
                     }
                     )
                 .catch((error) => {

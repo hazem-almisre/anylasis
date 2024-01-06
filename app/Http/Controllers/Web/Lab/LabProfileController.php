@@ -43,7 +43,7 @@ class LabProfileController extends Controller
                 $user->phone=($request->phone)?$request->phone:$user->phone;
                 $user->region=($request->region)?$request->region:$user->region;
                 // $user->description=($request->description)?$request->description:$user->description;
-                $user->labLocationId=($request->labLocationId)?$request->labLocationId:$user->labLocationId;
+                $user->labLocationId=($request->labLocationId != 0)?$request->labLocationId:$user->labLocationId;
                 $user->save();
                 // User::query()->where('id','=',$user->id)->update((array)$user);
                 return parent::sendRespons(['result'=>$user],ResponseMessage::$registerSuccessfullMessage,200);

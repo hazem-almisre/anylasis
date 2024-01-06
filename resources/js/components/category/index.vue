@@ -6,7 +6,7 @@
       <li class="breadcrumb-item">
         <a href="#">Dashboard</a>
       </li>
-      <li class="breadcrumb-item active">All Employee</li>
+      <li class="breadcrumb-item active">All Labs</li>
     </ol>
     <!-- Icon Cards-->
     <div class="row card shadow ml-3 mr-3">
